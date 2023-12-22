@@ -1,0 +1,60 @@
+import { gql } from "@apollo/client"
+
+export type User = {
+    id: String,
+    email: String,
+    username: String,
+    password: String,
+}
+
+export type LoginResponse = {
+    status: Number,
+    access_token: String,
+    data: User,
+}
+
+/*
+User Signup Request:
+{
+  "user": {
+    "email": "jie@gmail.com",
+    "username": "jiejie",
+    "password": "limyeejie888"
+  },
+}
+*/
+export const UserSignupMutation = gql`
+    mutation createUser($user: createUserInput!) {
+        createUser(user: $user) {
+            id
+            email
+            password
+            username
+        }
+    }
+`;
+
+
+/**
+User Login Request:
+{
+  "user": {
+    "email": "jie@gmail.com",
+    "password": "limyeejie888"
+  },
+}
+ */
+export const userLoginMutation = gql`
+    mutation userLogin($user: userLoginInput!) {
+        userLogin(user: $user) {
+            status
+            access_token
+            data {
+                id
+                email
+                username
+                password
+            }
+        }
+    }
+`;

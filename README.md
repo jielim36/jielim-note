@@ -1,6 +1,6 @@
 # Jielim-Note Project
 
-### Server Side Tech Stack
+### Backend Side Tech Stack
 
 | Technology  | Description                               |
 |-------------|-------------------------------------------|
@@ -12,6 +12,9 @@
 | TypeORM     | TypeScript-based ORM for DB interaction. |
 | PostgreSQL  | Open-source relational DB. |
 
+### Frontend Side Tech Stack
+
+
 
 ---
 
@@ -21,14 +24,19 @@
 
 Steps to run this project:
 
-1. Run `npm i` command
+1. Ensure that your current working directory is the `/server` of your project to install dependencies correctly.
 
-2. create a `.env` file under `server` folder
+2. Run `npm i` command
 
-3. Setup configuration inside `.env` file:
+3. create a `.env` file under `server` folder
+
+4. Setup configuration inside `.env` file:
 
 ```env
-PORT=4000 #application port number
+SERVER_PORT=4000 #backend (Express/GraphQL) port number
+WEB_PORT=3000 #frontend (React) port number
+SERVER_HOST=localhost #backend host
+WEB_HOST=localhost #frontend host
 ACCESS_TOKEN=your_access_token #example: abcdefg
 REFRESH_TOKEN=your_access_token #example: abcdefg
 JWT_COOKIE=your_jwt_cookie #example: aabbcc

@@ -13,7 +13,10 @@ AppDataSource.initialize().then(async () => {
     //Running express server
     const app = express();
     //middleware
-    app.use(cors());
+    app.use(cors({
+        origin: `http://${CONST.WEB_HOST}:${CONST.WEB_PORT}`,
+        credentials: true
+    }));
     app.use(morgan("dev"))
 
     //running apollo server
@@ -25,10 +28,10 @@ AppDataSource.initialize().then(async () => {
 
     await apolloServer.start();
 
-    apolloServer.applyMiddleware({app});
+    apolloServer.applyMiddleware({app , cors: false });
 
-    app.listen(CONST.PORT, ()=>{
-        console.log(`Server running on port number: ${CONST.PORT}`);
+    app.listen(CONST.SERVER_PORT, ()=>{
+        console.log(`Server running on port number: ${CONST.SERVER_PORT}`);
     })
 
 }).catch(error => console.log(error))
