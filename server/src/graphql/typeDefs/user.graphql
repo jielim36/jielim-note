@@ -1,0 +1,35 @@
+type User {
+    id: ID!
+    email: String!
+    username: String!
+    password: String!
+    # Add other fields as needed
+}
+
+type LoginResponse {
+    status: Int!
+    access_token: String!
+    data: User!
+}
+
+type Query {
+    hello: String!
+    getUsers: [User]
+    findUser(email: String!): User,
+}
+
+type Mutation{
+    createUser(user: createUserInput!): User
+    userLogin(user: userLoginInput!): LoginResponse
+}
+
+input createUserInput {
+    email: String!,
+    username: String!,
+    password: String!
+}
+
+input userLoginInput {
+    email: String!,
+    password: String!
+}
