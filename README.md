@@ -12,8 +12,16 @@
 | TypeORM     | TypeScript-based ORM for DB interaction. |
 | PostgreSQL  | Open-source relational DB. |
 
+
 ### Frontend Side Tech Stack
 
+| Technology     | Description                                        |
+|-----------------|----------------------------------------------------|
+| Typescript      | JavaScript with syntax for types.         |
+| React           | Declarative JavaScript library for building UI.   |
+| Apollo Client   | State management and data-fetching for GraphQL.    |
+| Emotion         | CSS-in-JS library for styling React components.    |
+| MUI (Material-UI)| React UI tools and component library.|
 
 
 ---
