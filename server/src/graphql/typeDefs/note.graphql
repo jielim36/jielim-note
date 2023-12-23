@@ -1,0 +1,36 @@
+type User {
+    id: ID!
+    email: String!
+    username: String!
+    password: String!
+}
+
+type Note {
+    id: ID!
+    title: String!
+    content: String!
+    author: User!
+    created_at: String!
+    updated_at: String!
+}
+
+type Query {
+    listNotesByUser: [Note!]!
+}
+
+type Mutation{
+    addNote(note: addNoteInput!): Note
+    updateNote(note: updateNoteInput!): Note
+    deleteNote(noteId:ID!): Boolean
+}
+
+input addNoteInput {
+    title: String!
+    content: String!
+}
+
+input updateNoteInput {
+    id: ID!
+    title: String!
+    content: String!
+}

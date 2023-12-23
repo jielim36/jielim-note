@@ -5,12 +5,20 @@ import cors from "cors";
 import morgan from "morgan";
 import { ApolloServer , gql } from "apollo-server-express";
 import { typeDefs, resolvers } from "./graphql"
-import { MyContext } from "./graphql/resolvers/user.resolver";
 import { verify } from "jsonwebtoken";
 import { User } from "./entity/User";
 import { generateAccessToken } from "./helpers/generateToken";
 import cookieParser from "cookie-parser";
 import { isAuth } from "./helpers/isAuth";
+
+export interface MyContext {
+    req: Request,
+    res: Response,
+    tokenPayload?: {
+        userId: string;
+        tokenVersion?: number;
+    },
+}
 
 AppDataSource.initialize().then(async () => {
 
