@@ -1,9 +1,12 @@
 import { User } from "../../entity/User"
 import { compare, hash } from "bcryptjs";
-import { generateAccessToken , gerenateRefreshToken } from "../../helpers/generateToken";
-import { Field, ObjectType } from "type-graphql";
+import { generateAccessToken , gerenateRefreshToken, sendRefreshToken } from "../../helpers/generateToken";
+import { Field, ObjectType, UseMiddleware } from "type-graphql";
 import { Request, Response } from "express";
 import { CONST } from "../../constants/strings";
+import { AppDataSource } from "../../data-source";
+import { isAuth } from "../../helpers/isAuth";
+import { verify } from "jsonwebtoken";
 
 class LoginResponse {
     status: number;
@@ -13,12 +16,53 @@ class LoginResponse {
 
 export interface MyContext {
     req: Request,
-    res: Response
+    res: Response,
+    tokenPayload?: any,
 }
 
 export const userResolver = {
     Query: {
         hello: ()=> "HELLO WORLD!!!",
+
+        me: async(_:any,__:any, context: MyContext) => {
+            try {
+                const bearer = context.req.headers['authorization'];
+                
+                if (!bearer) throw new Error('No Authenticated');
+            
+                const token = bearer.split(' ')[1];
+                console.log(token);
+                
+                if (!token) throw new Error('Not Authenticated');
+            
+                const tokenPayload = await verify(token, CONST.ACCESS_TOKEN);
+                if (!tokenPayload) throw new Error('Not Authenticated');
+            
+                // Assuming you want to store the decoded token payload in the context
+                context.tokenPayload = tokenPayload as any;
+            } catch (error) {
+                // If an error occurs during authentication, you might want to handle it appropriately.
+                // For now, just rethrowing the error.
+                throw new Error('Not Authenticated');
+            }
+
+            const payload = context.tokenPayload;
+            console.log(context);
+            
+            if(!payload) throw new Error("User not authenticate")
+
+            try {
+                const user = await User.findOneBy({
+                    id: payload.userId
+                })
+
+                if(!user) throw new Error("User not found");
+
+                return user;
+            } catch (error) {
+                throw new Error("Unable to fetch user")
+            }
+        },
         getUsers: async () => {
             return await User.find();
         },
@@ -74,6 +118,8 @@ export const userResolver = {
                     httpOnly: true
                 });
 
+                sendRefreshToken(contextValue.res, refreshToken);
+
                 const loginRespose = new LoginResponse();
                 loginRespose.status = 200;
                 loginRespose.access_token = accessToken;
@@ -83,6 +129,14 @@ export const userResolver = {
             } catch (error:any) {
                 throw new Error(error);
             }
+        },
+
+        revokeUserSession: async (parent:any, args:any): Promise<boolean> => {
+
+            await AppDataSource.getRepository(User).increment({id: args.userId} , "token_version", 1);
+
+
+            return true;
         }
     }
 }

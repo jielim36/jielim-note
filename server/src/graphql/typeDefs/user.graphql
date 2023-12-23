@@ -14,6 +14,7 @@ type LoginResponse {
 
 type Query {
     hello: String!
+    me: User!
     getUsers: [User]
     findUser(email: String!): User,
 }
@@ -21,6 +22,7 @@ type Query {
 type Mutation{
     createUser(user: createUserInput!): User
     userLogin(user: userLoginInput!): LoginResponse
+    revokeUserSession(userId: Int!): Boolean
 }
 
 input createUserInput {
