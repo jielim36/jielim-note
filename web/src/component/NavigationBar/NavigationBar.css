@@ -16,7 +16,45 @@
 }
 
 .UserInfo {
-    padding: 20px 0px;
-    margin: 0 15px;
+    margin: 0px 15px;
+    padding: 15px 0px;
     border-bottom: 1px solid #d9d9d9;
+    position: relative;
+    cursor: pointer;
 }
+
+
+.UserInfoOptions {
+    position: absolute;
+    top: 0%;
+    right: 0px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    max-height: 0;
+    opacity: 0;
+}
+  
+.UserInfo:hover .UserInfoOptions {
+    right: 0px;
+    top: 80%;
+    max-height: 1200px;
+    display: block;
+    z-index: 999;
+    opacity: 1;
+    overflow: hidden;
+    transition: max-height 3s ease;
+}
+  
+.UserInfoOption {
+    padding: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }

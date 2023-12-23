@@ -59,9 +59,7 @@ export default function SignIn() {
   };
 
   React.useEffect(()=> {
-    if(data){
-      console.log(data);
-      
+    if(data){      
       loginSuccessfully();
     }
   })

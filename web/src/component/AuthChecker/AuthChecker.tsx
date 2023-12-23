@@ -10,18 +10,20 @@ const AuthChecker = ({ children } : {children:any}) => {
     const isNoAuthPath:boolean = ['/login', '/register'].includes(location.pathname);
 
     const isLogin = async ()=> {
-        setLoginState(await isAuthenticated());
-        if(!loginState){
-            // window.location.href = '/login';
+        if(!isAuthenticated()){
             navigate("/login");
+            setLoginState(false);
+        }else{
+            setLoginState(true);
         }
     }
 
     useEffect( () => {
         if(isNoAuthPath){
             return;
+        }else{
+            isLogin();
         }
-        isLogin();
     }, [isNoAuthPath]);
 
     if(loginState || isNoAuthPath){

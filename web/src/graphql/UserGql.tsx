@@ -58,3 +58,13 @@ export const userLoginMutation = gql`
         }
     }
 `;
+
+/*
+No need any data
+it will be clear your jwt cookie to implement logout function
+*/
+export const userLogoutMutation = gql`
+    mutation Mutation {
+        logout
+    }
+`;

@@ -4,8 +4,9 @@ const TOKEN:string | undefined = "jielim-jwt";
 
 export const saveToken = (token: string) => storage.setItem(TOKEN, token);
 export const getToken = (): string | null => storage.getItem(TOKEN);
+export const clearToken = () => storage.removeItem(TOKEN);
 
-export const isAuthenticated = async (): Promise<boolean> => {
+export const isAuthenticated = (): boolean => {
     try {
             
         const token = getToken();

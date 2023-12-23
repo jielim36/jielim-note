@@ -13,25 +13,51 @@ import SendIcon from '@mui/icons-material/Send';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
+import { userLogoutMutation } from '../../graphql/UserGql';
+import { useMutation } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
+import { clearToken } from '../../helper/auth';
 
 const NavigationBar = ({isCloseNav} : {isCloseNav:boolean}) => {
 
-    const [open, setOpen] = React.useState(true);
+    const [userLogoutFunction , {data, loading ,error , client}] = useMutation(userLogoutMutation);
+    const navigate = useNavigate();
 
-    const handleClick = () => {
-        setOpen(!open);
+    const onLogoutHandler = async () => {
+        try {
+            await userLogoutFunction();
+            await client.clearStore();
+            clearToken();
+            navigate("/login");
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const [dirOpen, setDirOpen] = React.useState(true);
+
+    const dirHandleClick = () => {
+        setDirOpen(!dirOpen);
       };
 
     if(isCloseNav){
         return null;
     }
 
+
     return (
         <nav className='navigationContainer'>
-            <Stack direction="row" spacing={2} className='UserInfo'>
-                <Avatar style={{background: '#9254de'}} className='avatarNav'>JL</Avatar>
-                <p>Lim Yee Jie</p>
-            </Stack>
+            <div className='UserInfo'>
+                <Stack direction="row" spacing={2}>
+                    <Avatar style={{background: '#9254de'}} className='avatarNav'>JL</Avatar>
+                    <p>Lim Yee Jie</p>
+                </Stack>
+                <div className="UserInfoOptions">
+                    <p className="UserInfoOption">My Account</p>
+                    <p className="UserInfoOption" onClick={onLogoutHandler}>Logout</p>
+                </div>
+            </div>
+
             <List
                 sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
                 component="nav"
@@ -54,14 +80,14 @@ const NavigationBar = ({isCloseNav} : {isCloseNav:boolean}) => {
                     </ListItemIcon>
                     <ListItemText primary="Drafts" />
                 </ListItemButton>
-                <ListItemButton onClick={handleClick}>
+                <ListItemButton onClick={dirHandleClick}>
                     <ListItemIcon>
                     <InboxIcon />
                     </ListItemIcon>
                     <ListItemText primary="Inbox" />
-                    {open ? <ExpandLess /> : <ExpandMore />}
+                    {dirOpen ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
-                <Collapse in={open} timeout="auto" unmountOnExit>
+                <Collapse in={dirOpen} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
                     <ListItemButton sx={{ pl: 4 }}>
                         <ListItemIcon>
