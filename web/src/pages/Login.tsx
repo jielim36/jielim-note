@@ -15,7 +15,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { userLoginMutation } from '../graphql/UserGql';
 import { useMutation } from '@apollo/client';
 import { Alert, Stack } from '@mui/material';
-import { Navigate, redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { isAuthenticated, saveToken } from '../helper/auth';
 
 function Copyright(props: any) {
   return (
@@ -57,8 +58,19 @@ export default function SignIn() {
     }
   };
 
-  if(data){
-    navigate('/');
+  React.useEffect(()=> {
+    if(data){
+      console.log(data);
+      
+      loginSuccessfully();
+    }
+  })
+
+  const loginSuccessfully = async () => {
+    saveToken(data.userLogin.access_token);
+    if(await isAuthenticated()){
+      navigate("/");
+    }
   }
 
   return (

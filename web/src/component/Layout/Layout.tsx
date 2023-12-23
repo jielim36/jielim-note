@@ -3,9 +3,6 @@ import './Layout.css'
 import { Outlet, useLocation } from 'react-router-dom'
 import NavigationBar from '../NavigationBar/NavigationBar'
 
-
-
-
 const Layout = () => {
 
   const location = useLocation();
