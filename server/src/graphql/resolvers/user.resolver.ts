@@ -105,10 +105,12 @@ export const userResolver = {
         },
 
         revokeUserSession: async (parent:any, args:any): Promise<boolean> => {
-
             await AppDataSource.getRepository(User).increment({id: args.userId} , "token_version", 1);
+            return true;
+        },
 
-
+        logout: async (_:any, __:any , context:MyContext) => {
+            context.res.clearCookie(CONST.JWT_COOKIE);
             return true;
         }
     }

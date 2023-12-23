@@ -23,6 +23,7 @@ type Mutation{
     createUser(user: createUserInput!): User
     userLogin(user: userLoginInput!): LoginResponse
     revokeUserSession(userId: Int!): Boolean
+    logout: Boolean
 }
 
 input createUserInput {
