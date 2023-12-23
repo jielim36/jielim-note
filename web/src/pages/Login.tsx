@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { userLoginMutation } from '../graphql/UserGql';
 import { useMutation } from '@apollo/client';
 import { Alert, Stack } from '@mui/material';
+import { Navigate, redirect, useNavigate } from 'react-router-dom';
 
 function Copyright(props: any) {
   return (
@@ -35,6 +36,8 @@ const defaultTheme = createTheme();
 export default function SignIn() {
 
   const [userLoginFunction , {data, loading ,error}] = useMutation(userLoginMutation);
+  const navigate = useNavigate();
+
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -55,7 +58,7 @@ export default function SignIn() {
   };
 
   if(data){
-    console.log(data);
+    navigate('/');
   }
 
   return (
@@ -129,6 +132,10 @@ export default function SignIn() {
         <Stack sx={{ width: '100%' }} spacing={2}>
           {error && 
             <Alert severity="error">{error?.message}</Alert>
+          }
+          {
+            data &&
+            <Alert severity="success">Login Successfully</Alert>
           }
         </Stack>
       </Container>

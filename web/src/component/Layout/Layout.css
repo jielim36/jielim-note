@@ -1,0 +1,19 @@
+.LayoutContainer {
+    display: flex;
+    height: 100vh;
+}
+
+.sideBarContainer {
+    width: 250px;
+    height: 100%;
+    transition: width 1s ease;
+}
+
+.sideBarContainer.closeNav {
+    width: 0px;
+}
+
+.contentContainer {
+    flex: 1;
+    padding: 20px;
+}
