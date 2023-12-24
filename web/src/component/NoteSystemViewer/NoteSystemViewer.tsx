@@ -145,14 +145,16 @@ export const NoteSystemViewer = () => {
           <List dense={true}>
             {noteList && noteList.map((note)=>{
               return (
-                <ListItem 
-                key={note.id}
-                secondaryAction={
-                  <IconButton edge="end" aria-label="delete" onClick={()=> handleDeleteNote(note.id)}>
-                    <DeleteIcon />
-                  </IconButton>
-                }
-              >
+                <ListItem
+                  key={note.id}
+                  className='button'
+                  onClick={()=> {navigate(`/note/${note.id}}`)}}
+                  secondaryAction={
+                    <IconButton edge="end" aria-label="delete" onClick={()=> handleDeleteNote(note.id)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  }
+                >
                 <ListItemIcon >
                     <ArticleIcon sx={{ width: 24, height: 24 }}/>
                 </ListItemIcon>

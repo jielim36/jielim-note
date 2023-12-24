@@ -7,7 +7,7 @@ const AuthChecker = ({ children } : {children:any}) => {
     const [loginState, setLoginState] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
-    const isNoAuthPath:boolean = ['/login', '/register'].includes(location.pathname);
+    const isNoAuthPath:boolean = ['/login','/signup'].includes(location.pathname);
 
     const isLogin = async ()=> {
         if(!isAuthenticated()){

@@ -6,7 +6,7 @@ import NavigationBar from '../NavigationBar/NavigationBar'
 const Layout = () => {
 
   const location = useLocation();
-  const isCloseNav:boolean = ['/login', '/register'].includes(location.pathname);
+  const isCloseNav:boolean = ['/login', '/signup'].includes(location.pathname);
   
   return (
     <div className={`LayoutContainer`}>

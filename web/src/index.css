@@ -28,6 +28,10 @@ ul {
     list-style-type: disc;
 }
 
+.button {
+    cursor: pointer;
+}
+
 .button:hover {
     background-color: #f0f0f0;
 }

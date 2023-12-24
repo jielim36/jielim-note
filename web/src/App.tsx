@@ -7,6 +7,7 @@ import Signup from './pages/Signup';
 import { NoPage } from './pages/NoPage';
 import { isAuthenticated } from './helper/auth';
 import AuthChecker from './component/AuthChecker/AuthChecker';
+import Note from './pages/Note/Note';
 
 function App() {  
 
@@ -18,6 +19,7 @@ function App() {
               <Route index element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
+              <Route path="/note/:noteId" element={<Note />} />
               <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
