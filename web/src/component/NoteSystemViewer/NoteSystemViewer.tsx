@@ -130,7 +130,7 @@ export const NoteSystemViewer = () => {
             My Notes
           </Typography>
           <LoadingButton
-            size="small"
+            size='small'
             onClick={handleClickOpenAddNoteForm}
             endIcon={<AddIcon />}
             loading={addNoteLoading}
