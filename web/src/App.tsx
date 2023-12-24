@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter, Routes , Route, RouteProps, Navigate} from "react-router-dom"
 import Layout from './component/Layout/Layout';
 import Home from './pages/Home';
-import Login from './pages/Login';
+import Login from './pages/Login/Login';
 import Signup from './pages/Signup';
 import { NoPage } from './pages/NoPage';
 import { isAuthenticated } from './helper/auth';

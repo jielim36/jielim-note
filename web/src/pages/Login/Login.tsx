@@ -12,11 +12,13 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { userLoginMutation } from '../graphql/UserGql';
+import { userLoginMutation } from '../../graphql/UserGql';
 import { useMutation } from '@apollo/client';
 import { Alert, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { isAuthenticated, saveToken } from '../helper/auth';
+import { isAuthenticated, saveToken } from '../../helper/auth';
+import app_logo from "../../assets/app_logo.png";
+import './Login.css';
 
 function Copyright(props: any) {
   return (
@@ -84,9 +86,13 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
+          <img 
+            src={app_logo} 
+            className='app_logo'
+          />
+          <p className='app_welcome'>
+            Welcome to Jielim Note
+          </p>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
