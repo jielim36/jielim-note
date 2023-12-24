@@ -16,6 +16,7 @@ type Note {
 
 type Query {
     listNotesByUser: [Note!]!
+    getNoteByNoteId(noteId:ID!): Note!
 }
 
 type Mutation{

@@ -20,8 +20,27 @@ export const noteResolver = {
             } catch (error) {
                 throw new Error("Unable to fetch user")
             }
+        },
+        getNoteByNoteId: async (_:any , args:any , context:MyContext) => {
+            if(!await isAuth(context)) throw new Error("User not authenticate");
+            
+            try {
+                if(!args.noteId) throw new Error("noteId is not include in request")
+                console.log(args.noteId);
+                const noteId = args.noteId.replace("%7D","");
+                const note = await Note.findOne({
+                    where: {id: noteId},
+                    relations: ['author']
+                });
+                if(!note) throw new Error("Invalid noteId: cannot fetch note")
+
+                return note;
+            } catch (error) {
+                throw error;
+            }
         }
     },
+
     Mutation: {
         addNote: async (_:any, args:any , context:MyContext) => {
             if(!await isAuth(context)) throw new Error("User not authenticate");
