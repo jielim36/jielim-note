@@ -29,28 +29,29 @@ const Note = () => {
     const [note, setNote] = useState<NoteType|null>(null);
     const [getNoteByNoteIdFunction , {data:getNoteResult, loading:getNoteLoading, error:getNoteError}] = useLazyQuery(getNoteByNoteIdQuery);
 
-    useEffect(()=>{
-        const getNoteId = () =>{
-            const currentNoteIt = location.pathname.split("/note/")[1];
-            setNoteId(currentNoteIt);
-        }
-        getNoteId();
-        getNoteInfo();
-
-    },[location]);
-
-    const getNoteInfo = async ()=> {        
-        if(!noteId){
+    useEffect(() => {
+        const currentNoteId = location.pathname.split("/note/")[1];
+        setNoteId(currentNoteId);
+        getNoteInfo(currentNoteId);
+    }, [location]);
+      
+    const getNoteInfo = async (noteId: string | null) => {
+        if (!noteId) {
             return;
         }
         
-        const noteResult = await getNoteByNoteIdFunction({
+        try {
+            const noteResult = await getNoteByNoteIdFunction({
             variables: {
-                noteId: noteId
-            }
-        })
-        setNote(noteResult.data.getNoteByNoteId);
-    }
+                noteId: noteId,
+            },
+            });
+            setNote(noteResult.data.getNoteByNoteId);
+        } catch (error) {
+            console.error(error);
+            // 处理错误，可能重定向到错误页面或向用户显示消息
+        }
+    };
 
     if(getNoteError){
         if(getNoteError.networkError){
@@ -60,9 +61,7 @@ const Note = () => {
         }
     }
 
-    if(getNoteLoading || !note){
-        console.log(note);
-        
+    if(getNoteLoading || !note){        
         return (
             <SkeletonTypography />
         );

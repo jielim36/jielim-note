@@ -37,17 +37,25 @@ AppDataSource.initialize().then(async () => {
 
     app.post('/refresh-token', async(req,res)=>{
         const token = req.cookies[CONST.JWT_COOKIE];
-        if(!token) return res.send({
-            status: 204,
-            success: false,
-            msg: "No token cookie included in request.",
-            access_token: "",
-        })
-
+        if(!token){
+            console.log(2222222222222);
+            return res.send({
+                status: 204,
+                success: false,
+                msg: "No token cookie included in request.",
+                access_token: "",
+            })  
+        } 
         let data: any = null;
         try {
+            console.log(333333333333333);
+            
             data = verify(token , CONST.REFRESH_TOKEN);
+            console.log(5444444444444444);
+
         } catch (error) {
+            console.log(111111111111);
+            
             console.error(error);
             return res.send({
                 status: 203,

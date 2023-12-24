@@ -29,7 +29,6 @@ export const isAuthenticated = (): boolean => {
         // console.log('Expiration Time (exp):', expValue);
         const expDate = new Date(expValue * 1000);
         const currentDate = new Date();
-
         
         if (expDate < currentDate) {
             //expired
@@ -43,3 +42,12 @@ export const isAuthenticated = (): boolean => {
     
     return true;
 }
+
+export const isAuthenticatedWithPromise: Promise<boolean> = new Promise<boolean>((resolve, reject) => {
+    try {
+        const result = isAuthenticated();
+        resolve(result);
+    } catch (error) {
+        reject(error);
+    }
+});

@@ -102,7 +102,8 @@ export const NoteSystemViewer = () => {
         variables: {noteId: noteId}
       })
       if(result){
-        updateNoteList();
+        await updateNoteList();
+        navigate('/');
       }
     };
 

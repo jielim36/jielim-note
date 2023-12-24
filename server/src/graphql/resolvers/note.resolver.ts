@@ -26,7 +26,6 @@ export const noteResolver = {
             
             try {
                 if(!args.noteId) throw new Error("noteId is not include in request")
-                console.log(args.noteId);
                 const noteId = args.noteId.replace("%7D","");
                 const note = await Note.findOne({
                     where: {id: noteId},

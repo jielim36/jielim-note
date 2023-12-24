@@ -5,11 +5,15 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { ApolloClient, InMemoryCache, ApolloProvider , createHttpLink, ApolloLink } from '@apollo/client';
 import {setContext} from "@apollo/client/link/context"
-import { getToken } from './helper/auth';
+import { getToken, isAuthenticated, isAuthenticatedWithPromise, saveToken } from './helper/auth';
 import { SERVER_PORT , SERVER_HOST } from './helper/configuration';
+import { TokenRefreshLink } from "apollo-link-token-refresh";
+
+const GRAPHQL_URL = `http://${SERVER_HOST}:${SERVER_PORT}/graphql`;
+const EXPRESS_URL = `http://${SERVER_HOST}:${SERVER_PORT}`;
 
 const httpLink = createHttpLink({
-  uri: `http://${SERVER_HOST}:${SERVER_PORT}/graphql`,
+  uri: GRAPHQL_URL,
   credentials: "include",
 });
 
@@ -23,8 +27,27 @@ const authLink = setContext( (_ , {headers}) =>{
   }
 })
 
+const refreshLink = new TokenRefreshLink({
+  accessTokenField: 'access_token',
+  isTokenValidOrUndefined: async ()=> isAuthenticated(),
+  fetchAccessToken: () => {
+    return fetch(`${EXPRESS_URL}/refresh-token`, {
+      method: 'POST',
+      credentials: "include"
+    });
+  },
+  handleFetch: (accessToken) => {
+    saveToken(accessToken)
+  },
+  handleError: err => {
+    // full control over handling token fetch Error
+    console.warn('Your refresh token is invalid. Try to relogin');
+    console.error(err);     
+  },
+});
+
 const client = new ApolloClient({
-  link: ApolloLink.from([authLink,httpLink]),
+  link: ApolloLink.from([refreshLink,authLink,httpLink]),
   cache: new InMemoryCache()
 });
 

@@ -8,7 +8,7 @@ export const generateAccessToken = (user:User) => {
         userId: user.id,
         tokenVersion: user.token_version
     } , CONST.ACCESS_TOKEN , {
-        expiresIn: '15m',
+        expiresIn: '24h',
     })
 }
 
