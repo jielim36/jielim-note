@@ -16,11 +16,10 @@
 }
 
 .UserInfo {
-    margin: 0px 15px;
-    padding: 15px 0px;
-    border-bottom: 1px solid #d9d9d9;
     position: relative;
     cursor: pointer;
+    padding: 5px 60px 5px 10px;
+    border-radius: 10px;
 }
 
 
@@ -39,7 +38,7 @@
   
 .UserInfo:hover .UserInfoOptions {
     right: 0px;
-    top: 80%;
+    top: 120%;
     max-height: 1200px;
     display: block;
     z-index: 999;
@@ -58,3 +57,14 @@
       background-color: #f0f0f0;
     }
   }
+
+.userInfoContainer {
+    border-bottom: 1px solid #d9d9d9;
+    margin: 0px 15px;
+    padding: 15px 0px;
+}
+
+.homeBtn {
+    width: 50px;
+    height: 50px;
+}

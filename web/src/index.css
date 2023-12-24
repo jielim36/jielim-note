@@ -27,3 +27,7 @@ a:hover {
 ul {
     list-style-type: disc;
 }
+
+.button:hover {
+    background-color: #f0f0f0;
+}
