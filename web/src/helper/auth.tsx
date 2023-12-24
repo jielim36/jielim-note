@@ -1,6 +1,7 @@
 import storage from "local-storage-fallback";
+import { JWT_COOKIE } from "./configuration";
 
-const TOKEN:string | undefined = "jielim-jwt";
+const TOKEN:string | undefined = JWT_COOKIE;
 
 export const saveToken = (token: string) => storage.setItem(TOKEN, token);
 export const getToken = (): string | null => storage.getItem(TOKEN);

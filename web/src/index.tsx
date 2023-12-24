@@ -6,9 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import { ApolloClient, InMemoryCache, ApolloProvider , createHttpLink, ApolloLink } from '@apollo/client';
 import {setContext} from "@apollo/client/link/context"
 import { getToken } from './helper/auth';
+import { SERVER_PORT , SERVER_HOST } from './helper/configuration';
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:4000/graphql",
+  uri: `http://${SERVER_HOST}:${SERVER_PORT}/graphql`,
   credentials: "include",
 });
 

@@ -56,3 +56,17 @@ DB_NAME=your_database_name #example: jielim_note
 ```
 
 3. Run `npm start` command
+
+
+### Web Side
+
+1. Setup configuration inside `./src/helper/configuration.tsx` file:
+
+```typescript
+export const SERVER_PORT = '4000';
+export const WEB_PORT = '3000';
+export const SERVER_HOST = 'localhost';
+export const WEB_HOST = 'localhost';
+export const JWT_COOKIE = 'jielim-jwt'; //must be same with your server side
+```
+
