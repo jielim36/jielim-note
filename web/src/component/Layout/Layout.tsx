@@ -9,7 +9,7 @@ const Layout = () => {
   const isCloseNav:boolean = ['/login', '/signup'].includes(location.pathname);
   
   return (
-    <div className={`LayoutContainer`}>
+    <div className={`LayoutContainer ${isCloseNav ? "closeNav" : "" }`}>
       <div className={`sideBarContainer ${isCloseNav ? "closeNav" : "" }`}>
         <NavigationBar isCloseNav={isCloseNav}/>
       </div>

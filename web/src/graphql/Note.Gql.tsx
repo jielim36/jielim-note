@@ -66,3 +66,29 @@ export const deleteNoteMutation = gql`
     deleteNote(noteId: $noteId)
   }
 `;
+
+/*
+{
+  "note": {
+    "id": null,
+    "title": null,
+    "content": null
+  }
+}
+*/
+export const updateNoteMutation = gql`
+  mutation Mutation($note: updateNoteInput!) {
+    updateNote(note: $note) {
+      id
+      title
+      content
+      updated_at
+      created_at
+      author {
+        id
+        username
+        email
+      }
+    }
+  }
+`;

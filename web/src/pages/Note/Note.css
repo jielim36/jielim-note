@@ -1,1 +1,28 @@
+.noteInfo {
+    position: fixed;
+    top: 50px; /* Adjust as needed */
+    right: 30px; /* Adjust as needed */
+    background-color: #fff;
+    padding: 15px 25px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+}
 
+.noteInfoTitle {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.info-item {
+    margin-bottom: 5px;
+}
+
+.noteInfo .saveBtn {
+    margin-top: 15px;
+    align-self: center;
+}
