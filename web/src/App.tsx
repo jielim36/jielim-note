@@ -3,7 +3,7 @@ import {BrowserRouter, Routes , Route, RouteProps, Navigate} from "react-router-
 import Layout from './component/Layout/Layout';
 import Home from './pages/Home';
 import Login from './pages/Login/Login';
-import Signup from './pages/Signup';
+import Signup from './pages/Signup/Signup';
 import { NoPage } from './pages/NoPage';
 import { isAuthenticated } from './helper/auth';
 import AuthChecker from './component/AuthChecker/AuthChecker';

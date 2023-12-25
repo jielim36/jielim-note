@@ -23,7 +23,7 @@ User Signup Request:
   },
 }
 */
-export const UserSignupMutation = gql`
+export const userSignupMutation = gql`
     mutation createUser($user: createUserInput!) {
         createUser(user: $user) {
             id
@@ -66,5 +66,15 @@ it will be clear your jwt cookie to implement logout function
 export const userLogoutMutation = gql`
     mutation Mutation {
         logout
+    }
+`;
+
+export const getUserByTokenQuery = gql`
+    query Query {
+        me {
+            id
+            username
+            email
+        }
     }
 `;

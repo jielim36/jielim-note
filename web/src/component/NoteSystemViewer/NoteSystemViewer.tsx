@@ -126,21 +126,21 @@ export const NoteSystemViewer = () => {
     return (
       <div className='noteViewContainer fadeInAnimation'>
         <Grid item xs={12} md={6}>
-        <Stack direction="row" spacing={15} padding={1} boxSizing={'border-box'}>
-          <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-            My Notes
-          </Typography>
-          <LoadingButton
-            size='small'
-            onClick={handleClickOpenAddNoteForm}
-            endIcon={<AddIcon />}
-            loading={addNoteLoading}
-            loadingPosition="end"
-            variant="contained"
-          >
-            <span>Add</span>
-          </LoadingButton>
-        </Stack>
+          <div className='noteViewHeader'>
+            <Typography  variant="h6" component="div">
+              My Notes
+            </Typography>
+            <LoadingButton
+              size='small'
+              onClick={handleClickOpenAddNoteForm}
+              endIcon={<AddIcon />}
+              loading={addNoteLoading}
+              loadingPosition="end"
+              variant="contained"
+              >
+              <span>Add</span>
+            </LoadingButton>
+          </div>
         
         <Demo>
           <List dense={true}>
@@ -161,6 +161,7 @@ export const NoteSystemViewer = () => {
                 </ListItemIcon>
                 <ListItemText
                   primary={note.title}
+                  className='noteTitle'
                 />
               </ListItem>
               )
