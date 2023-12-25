@@ -76,8 +76,9 @@ export const noteResolver = {
                 
                 if(!updatedNote.id || !updatedNote.title || !updatedNote.content) throw new Error("Invalid Note");
                 
-                const note = await Note.findOneBy({
-                    id: updatedNote.id
+                const note = await Note.findOne({
+                    where: {id: updatedNote.id},
+                    relations: ["author"]
                 })
 
                 if(!note) throw new Error("Note is not found");
