@@ -14,8 +14,14 @@ export const noteResolver = {
                     id: context.tokenPayload?.userId
                 })
                 if(!user) throw new Error("User not found");
+                console.log(user);
                 
-                return await Note.find({relations: ["author"]});
+                return await Note.find({
+                    where: {author: {
+                        id: user.id
+                    }},
+                    relations: ["author"]
+                });
 
             } catch (error) {
                 throw new Error("Unable to fetch user")
